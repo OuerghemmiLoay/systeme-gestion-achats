@@ -9,9 +9,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
-/**
- * Swagger/OpenAPI configuration for API documentation.
- */
 @Configuration
 public class SwaggerConfig {
 

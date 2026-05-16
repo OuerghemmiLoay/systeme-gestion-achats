@@ -12,9 +12,7 @@ import tn.itbs.note.repository.ProduitRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Service for managing products.
- */
+
 @Service
 @Transactional
 public class ProduitService {

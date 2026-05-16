@@ -9,9 +9,7 @@ import tn.itbs.note.entity.Fournisseur;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Repository for Fournisseur entity.
- */
+
 @Repository
 public interface FournisseurRepository extends JpaRepository<Fournisseur, Long> {
 

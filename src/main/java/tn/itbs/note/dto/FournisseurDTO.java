@@ -5,9 +5,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-/**
- * DTO for Fournisseur entity.
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

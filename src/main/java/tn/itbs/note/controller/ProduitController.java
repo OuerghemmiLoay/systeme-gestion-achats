@@ -14,9 +14,7 @@ import tn.itbs.note.service.ProduitService;
 
 import java.util.List;
 
-/**
- * REST Controller for managing products (Produits).
- */
+
 @RestController
 @RequestMapping("/produits")
 @Tag(name = "Produits", description = "Endpoints for managing products")

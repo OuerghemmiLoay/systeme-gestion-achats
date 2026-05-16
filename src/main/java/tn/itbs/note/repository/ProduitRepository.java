@@ -8,9 +8,7 @@ import tn.itbs.note.entity.Produit;
 
 import java.util.Optional;
 
-/**
- * Repository for Produit entity.
- */
+
 @Repository
 public interface ProduitRepository extends JpaRepository<Produit, Long> {
 

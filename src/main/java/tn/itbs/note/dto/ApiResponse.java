@@ -2,9 +2,7 @@ package tn.itbs.note.dto;
 
 import lombok.*;
 
-/**
- * Generic API Response wrapper.
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

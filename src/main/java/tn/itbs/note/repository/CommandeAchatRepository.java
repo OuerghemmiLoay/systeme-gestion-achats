@@ -10,9 +10,7 @@ import tn.itbs.note.entity.CommandeAchat.StatutCommande;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * Repository for CommandeAchat entity.
- */
+
 @Repository
 public interface CommandeAchatRepository extends JpaRepository<CommandeAchat, Long> {
 

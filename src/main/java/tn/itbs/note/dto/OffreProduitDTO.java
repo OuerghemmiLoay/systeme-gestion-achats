@@ -5,9 +5,6 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * DTO for offer comparison between suppliers.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -6,9 +6,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-/**
- * HistoriqueAchats entity representing the purchase history.
- */
+
 @Entity
 @Table(name = "historique_achats")
 @Data

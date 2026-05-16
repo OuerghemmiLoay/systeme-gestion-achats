@@ -14,9 +14,6 @@ import tn.itbs.note.service.CommandeAchatService;
 
 import java.util.List;
 
-/**
- * REST Controller for managing purchase orders (Commandes Achat).
- */
 @RestController
 @RequestMapping("/commandes")
 @Tag(name = "Commandes Achat", description = "Endpoints for managing purchase orders")

@@ -14,9 +14,7 @@ import tn.itbs.note.repository.HistoriqueAchatsRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Service for managing suppliers.
- */
+
 @Service
 @Transactional
 public class FournisseurService {

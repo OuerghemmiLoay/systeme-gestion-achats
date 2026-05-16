@@ -5,9 +5,6 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-/**
- * DTO for HistoriqueAchats entity.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

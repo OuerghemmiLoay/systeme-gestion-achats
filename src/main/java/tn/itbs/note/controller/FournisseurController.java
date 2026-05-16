@@ -14,9 +14,7 @@ import tn.itbs.note.service.FournisseurService;
 
 import java.util.List;
 
-/**
- * REST Controller for managing suppliers (Fournisseurs).
- */
+
 @RestController
 @RequestMapping("/fournisseurs")
 @Tag(name = "Fournisseurs", description = "Endpoints for managing suppliers")

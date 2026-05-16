@@ -6,9 +6,7 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * DTO for LigneCommandeAchat entity.
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

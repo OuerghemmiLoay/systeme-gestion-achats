@@ -7,9 +7,7 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * LigneCommandeAchat entity representing a line item in a purchase order.
- */
+
 @Entity
 @Table(name = "lignes_commande_achat")
 @Data

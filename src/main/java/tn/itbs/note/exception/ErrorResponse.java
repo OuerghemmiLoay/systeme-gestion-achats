@@ -2,9 +2,7 @@ package tn.itbs.note.exception;
 
 import lombok.*;
 
-/**
- * Error response DTO for consistent error responses.
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -7,9 +7,6 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * Produit entity representing a product in the system.
- */
 @Entity
 @Table(name = "produits")
 @Data

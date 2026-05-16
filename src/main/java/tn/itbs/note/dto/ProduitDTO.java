@@ -6,9 +6,6 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * DTO for Produit entity.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

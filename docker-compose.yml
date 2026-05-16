@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # MySQL Database
+
   mysql:
     image: mysql:8.0
     container_name: systeme-gestion-mysql
@@ -21,7 +21,7 @@ services:
     networks:
       - systeme-network
 
-  # Spring Boot API
+
   api:
     build:
       context: .
@@ -45,20 +45,6 @@ services:
       timeout: 10s
       retries: 5
       start_period: 40s
-
-  # Optional: Nginx for Angular front-end (comment out if not using)
-  # nginx:
-  #   image: nginx:alpine
-  #   container_name: systeme-gestion-frontend
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #     - ./frontend/dist:/usr/share/nginx/html
-  #     - ./nginx.conf:/etc/nginx/nginx.conf
-  #   depends_on:
-  #     - api
-  #   networks:
-  #     - systeme-network
 
 volumes:
   mysql-data:

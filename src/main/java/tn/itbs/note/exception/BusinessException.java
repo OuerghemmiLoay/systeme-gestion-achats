@@ -1,8 +1,6 @@
 package tn.itbs.note.exception;
 
-/**
- * Custom exception for business logic violations.
- */
+
 public class BusinessException extends RuntimeException {
 
     private String errorCode;

@@ -9,9 +9,7 @@ import tn.itbs.note.entity.HistoriqueAchats;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * Repository for HistoriqueAchats entity.
- */
+
 @Repository
 public interface HistoriqueAchatsRepository extends JpaRepository<HistoriqueAchats, Long> {
 

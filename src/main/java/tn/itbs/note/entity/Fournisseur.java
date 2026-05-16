@@ -8,9 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Fournisseur entity representing a supplier in the system.
- */
+
 @Entity
 @Table(name = "fournisseurs")
 @Data

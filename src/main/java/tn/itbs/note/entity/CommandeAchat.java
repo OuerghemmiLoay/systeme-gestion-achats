@@ -9,9 +9,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * CommandeAchat entity representing a purchase order.
- */
 @Entity
 @Table(name = "commandes_achat")
 @Data

@@ -4,9 +4,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
-/**
- * DTO for supplier evaluation information.
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

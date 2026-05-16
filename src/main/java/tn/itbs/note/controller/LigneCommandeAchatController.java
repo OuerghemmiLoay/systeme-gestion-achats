@@ -14,9 +14,7 @@ import tn.itbs.note.service.LigneCommandeAchatService;
 
 import java.util.List;
 
-/**
- * REST Controller for managing purchase order line items (Lignes Commande Achat).
- */
+
 @RestController
 @RequestMapping("/lignes-commande")
 @Tag(name = "Lignes Commande", description = "Endpoints for managing purchase order line items")

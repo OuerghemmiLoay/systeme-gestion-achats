@@ -1,8 +1,6 @@
 package tn.itbs.note.exception;
 
-/**
- * Custom exception for resource not found scenarios.
- */
+
 public class ResourceNotFoundException extends RuntimeException {
 
     private String resourceName;

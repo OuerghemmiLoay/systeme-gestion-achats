@@ -16,9 +16,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Service for supplier evaluation and offer comparison.
- */
+
 @Service
 @Transactional(readOnly = true)
 public class EvaluationService {

@@ -8,9 +8,7 @@ import tn.itbs.note.entity.LigneCommandeAchat;
 
 import java.util.List;
 
-/**
- * Repository for LigneCommandeAchat entity.
- */
+
 @Repository
 public interface LigneCommandeAchatRepository extends JpaRepository<LigneCommandeAchat, Long> {
 
