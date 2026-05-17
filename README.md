@@ -76,9 +76,9 @@ docker compose logs -f api
 ```
 
 2. **Access Application**
- - API: `http://localhost:8080/api`
+ - API: `http://localhost:18080/api`
 - Frontend: `http://localhost:4200`
- - Swagger UI: `http://localhost:8080/api/swagger-ui.html`
+ - Swagger UI: `http://localhost:18080/api/swagger-ui.html`
 
 ### Docker Deployment
 
@@ -129,7 +129,7 @@ SPRING_DATASOURCE_USERNAME=systeme_user
 SPRING_DATASOURCE_PASSWORD=systeme_password
 ```
 
-If you want to connect to the database from your host machine, use port `3306` on `localhost` while the Compose stack is running. The API is exposed on `http://localhost:8080`.
+If you want to connect to the database from your host machine, use port `3307` on `localhost` while the Compose stack is running. The API is exposed on `http://localhost:18080`.
 
 ---
 

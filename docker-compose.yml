@@ -9,7 +9,7 @@ services:
       MYSQL_USER: systeme_user
       MYSQL_PASSWORD: systeme_password
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     healthcheck:
@@ -27,13 +27,13 @@ services:
       dockerfile: Dockerfile
     container_name: systeme-gestion-api
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/systeme_gestion_db?useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/systeme_gestion_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: systeme_user
       SPRING_DATASOURCE_PASSWORD: systeme_password
       SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
       SERVER_PORT: 8080
     ports:
-      - "8080:8080"
+      - "18080:8080"
     depends_on:
       mysql:
         condition: service_healthy
