@@ -1,6 +1,6 @@
 # Système de Gestion des Achats et Fournisseurs
 
-A full-stack web application for managing suppliers, purchase orders, and procurement analytics. Built with Spring Boot 3.1.0 REST API and comprehensive evaluation features.
+A full-stack web application for managing suppliers, purchase orders, and procurement analytics. Built with a Spring Boot 3.5.14 REST API and a simple Angular frontend.
 
 ## 📋 Quick Links
 
@@ -8,6 +8,7 @@ A full-stack web application for managing suppliers, purchase orders, and procur
 - [Tech Stack](#tech-stack)
 - [Setup](#setup)
 - [API Documentation](#api-documentation)
+- [Frontend](#frontend)
 - [Architecture](#architecture)
 
 ---
@@ -20,6 +21,7 @@ A full-stack web application for managing suppliers, purchase orders, and procur
 - ✅ **Supplier Evaluation** - Automated rating based on quality, delivery time, and cost
 - ✅ **Offer Comparison** - Compare prices and quality metrics across suppliers
 - ✅ **API Documentation** - Swagger/OpenAPI 3.x integration
+- ✅ **Angular UI** - Simple dashboard and module pages for the main business flows
 
 ---
 
@@ -27,10 +29,12 @@ A full-stack web application for managing suppliers, purchase orders, and procur
 
 | Component | Version | Purpose |
 |-----------|---------|---------|
-| **Java** | 11+ | Programming language |
-| **Spring Boot** | 3.1.0 | Web framework & REST API |
+| **Java** | 17+ | Programming language |
+| **Spring Boot** | 3.5.14 | Web framework & REST API |
 | **Spring Data JPA** | Latest | ORM abstraction |
 | **Maven** | 3.6+ | Build & dependency management |
+| **Angular** | 17+ | Frontend UI |
+| **Node.js** | 20+ | Frontend build/runtime |
 | **MySQL** | 8.0+ | Database |
 | **Swagger/OpenAPI** | 3.x | API documentation |
 | **Docker** | Latest | Containerization |
@@ -41,21 +45,8 @@ A full-stack web application for managing suppliers, purchase orders, and procur
 
 ```
 Systeme_de_gestion/
-├── src/
-│   ├── main/
-│   │   ├── java/tn/itbs/
-│   │   │   ├── config/           # Spring configuration
-│   │   │   ├── controller/       # REST endpoints
-│   │   │   ├── service/          # Business logic
-│   │   │   ├── repository/       # Data access
-│   │   │   ├── entity/           # JPA entities
-│   │   │   ├── dto/              # DTOs
-│   │   │   └── exception/        # Exception handling
-│   │   └── resources/
-│   │       └── application.properties
-│   └── test/                     # Unit tests
-├── pom.xml                       # Maven configuration
-├── Dockerfile                    # Docker image
+├── backend/                      # Spring Boot API
+├── frontend/                     # Angular UI
 ├── docker-compose.yml           # Container orchestration
 └── README.md                     # This file
 ```
@@ -65,42 +56,80 @@ Systeme_de_gestion/
 ## 🚀 Setup
 
 ### Prerequisites
-- Java 11 or higher
-- Maven 3.6+
-- MySQL 8.0+
+- Docker Desktop or another running Docker Engine with Docker Compose v2
+- Java 17 or higher for local backend builds
+- Maven 3.6+ for local backend builds
+- Node.js 20+ for local frontend builds
+- MySQL 8.0+ if you want to run services outside Docker
 
 ### Quick Start
 
-1. **Configure Database**
-```properties
-# src/main/resources/application.properties
-spring.datasource.url=jdbc:mysql://localhost:3306/systeme_gestion_db
-spring.datasource.username=root
-spring.datasource.password=root
-```
+The deployment-ready path is Docker-based. It builds the Spring Boot API, the Angular frontend, and MySQL together with the service overrides already defined in `docker-compose.yml`.
 
-2. **Build & Run**
+1. **Build & Run with Docker**
 ```bash
-# Build with Maven
-mvn clean install
+# Build and start everything
+docker compose up --build -d
 
-# Run the application
-mvn spring-boot:run
+# View logs if needed
+docker compose logs -f api
 ```
 
-3. **Access Application**
-- API: `http://localhost:8080/api`
-- Swagger UI: `http://localhost:8080/api/swagger-ui.html`
+2. **Access Application**
+ - API: `http://localhost:8080/api`
+- Frontend: `http://localhost:4200`
+ - Swagger UI: `http://localhost:8080/api/swagger-ui.html`
 
 ### Docker Deployment
 
 ```bash
 # Build and start with Docker Compose
-docker-compose up -d
+docker compose up --build -d
 
 # Stop services
-docker-compose down
+docker compose down
 ```
+
+### Docker (backend and frontend separately)
+
+The repository contains `backend/` and `frontend/` folders. You can build and run services separately, or let `docker compose` build both contexts automatically.
+
+Build backend and frontend manually (recommended when developing):
+
+```bash
+# build backend (from project root)
+cd backend
+mvn -DskipTests package
+
+# build frontend (from project root)
+cd ../frontend
+npm ci
+npm run build
+
+# from project root, build and run with compose
+cd ..
+docker compose up --build -d
+```
+
+Or run compose directly (single-step):
+
+```bash
+docker compose up --build -d
+```
+
+You can override the default environment variables by creating a `.env` file in the project root with values like:
+
+```env
+MYSQL_ROOT_PASSWORD=root
+MYSQL_DATABASE=systeme_gestion_db
+MYSQL_USER=systeme_user
+MYSQL_PASSWORD=systeme_password
+SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/systeme_gestion_db?useSSL=false&serverTimezone=UTC
+SPRING_DATASOURCE_USERNAME=systeme_user
+SPRING_DATASOURCE_PASSWORD=systeme_password
+```
+
+If you want to connect to the database from your host machine, use port `3306` on `localhost` while the Compose stack is running. The API is exposed on `http://localhost:8080`.
 
 ---
 
@@ -113,7 +142,22 @@ Access interactive API documentation at: `http://localhost:8080/api/swagger-ui.h
 **Suppliers:** `GET/POST /api/fournisseurs` | `GET /api/fournisseurs/{id}`  
 **Products:** `GET/POST /api/produits` | `GET /api/produits/{id}`  
 **Orders:** `GET/POST /api/commandes` | `PATCH /api/commandes/{id}/status/{status}`  
+**History:** `GET/POST /api/historiques-achats` | `GET /api/historiques-achats/{id}`  
 **Evaluation:** `GET /api/evaluations/supplier/{id}`
+
+---
+
+## 🖥 Frontend
+
+The Angular app lives in `frontend/` and provides simple pages for:
+- Dashboard
+- Suppliers
+- Products
+- Orders
+- Purchase history
+- Supplier evaluations
+
+The frontend uses the backend API at `http://localhost:8080/api`.
 
 ---
 

@@ -1,0 +1,26 @@
+<header class="container" style="padding: 1.2rem 0 0.8rem;">
+  <div class="card section" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+    <div>
+      <div class="badge">Angular Frontend</div>
+      <h1 class="page-title" style="margin-top:0.75rem;">Système de Gestion des Achats</h1>
+      <p class="page-subtitle" style="margin:0.8rem 0 0;">Interface simple pour consulter et alimenter les fournisseurs, produits, commandes, historique d’achats et évaluations.</p>
+    </div>
+    <div class="small">Backend API: http://localhost:8080/api</div>
+  </div>
+
+  <nav class="card section" style="margin-top:1rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+    <a
+      *ngFor="let item of navItems"
+      class="nav-link"
+      [routerLink]="item.path"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+    >
+      {{ item.label }}
+    </a>
+  </nav>
+</header>
+
+<main class="container" style="padding: 0 0 2rem;">
+  <router-outlet></router-outlet>
+</main>
