@@ -28,8 +28,10 @@ import { Produit } from '../core/models';
           </div>
         </div>
         <div class="actions" style="margin-top:1rem;">
-          <button class="btn btn-primary" (click)="create()">Créer</button>
-          <button class="btn btn-secondary" (click)="load()">Rafraîchir</button>
+          <button *ngIf="!editing" class="btn btn-primary" (click)="create()">Créer</button>
+          <button *ngIf="editing" class="btn btn-primary" (click)="update()">Mettre à jour</button>
+          <button *ngIf="editing" class="btn btn-secondary" (click)="cancelEdit()">Annuler</button>
+          <button *ngIf="!editing" class="btn btn-secondary" (click)="load()">Rafraîchir</button>
         </div>
         <p class="helper" style="margin-top:0.75rem;">{{ message }}</p>
       </div>
@@ -43,6 +45,7 @@ import { Produit } from '../core/models';
               <th>Nom</th>
               <th>Description</th>
               <th>Prix</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -50,6 +53,10 @@ import { Produit } from '../core/models';
               <td>{{ item.nom }}</td>
               <td>{{ item.description }}</td>
               <td>{{ item.prix_reference }}</td>
+              <td>
+                <button class="btn btn-link" (click)="edit(item)">Editer</button>
+                <button class="btn btn-link danger" (click)="delete(item.id)">Supprimer</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -65,6 +72,8 @@ export class ProduitsComponent implements OnInit {
     description: '',
     prix_reference: 0
   };
+  editing = false;
+  editingId?: number;
 
   constructor(private api: ApiService) {}
 
@@ -93,6 +102,53 @@ export class ProduitsComponent implements OnInit {
       },
       error: (error) => {
         this.message = error?.error?.message ?? 'Erreur lors de la création.';
+      }
+    });
+  }
+
+  edit(item: Produit): void {
+    this.editing = true;
+    this.editingId = item.id;
+    this.form = { ...item } as Produit;
+    this.message = 'Mode édition';
+  }
+
+  update(): void {
+    if (!this.editingId) {
+      this.message = 'Aucun produit sélectionné.';
+      return;
+    }
+    this.api.updateProduit(this.editingId, this.form).subscribe({
+      next: () => {
+        this.message = 'Produit mis à jour.';
+        this.editing = false;
+        this.editingId = undefined;
+        this.form = { nom: '', description: '', prix_reference: 0 };
+        this.load();
+      },
+      error: (error) => {
+        this.message = error?.error?.message ?? 'Erreur lors de la mise à jour.';
+      }
+    });
+  }
+
+  cancelEdit(): void {
+    this.editing = false;
+    this.editingId = undefined;
+    this.form = { nom: '', description: '', prix_reference: 0 };
+    this.message = 'Annulé.';
+  }
+
+  delete(id?: number): void {
+    if (!id) return;
+    if (!confirm('Supprimer ce produit ?')) return;
+    this.api.deleteProduit(id).subscribe({
+      next: () => {
+        this.message = 'Produit supprimé.';
+        this.load();
+      },
+      error: () => {
+        this.message = 'Erreur lors de la suppression.';
       }
     });
   }

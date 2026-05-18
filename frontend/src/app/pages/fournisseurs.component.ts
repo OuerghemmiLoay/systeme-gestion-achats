@@ -32,8 +32,10 @@ import { Fournisseur } from '../core/models';
           </div>
         </div>
         <div class="actions" style="margin-top:1rem;">
-          <button class="btn btn-primary" (click)="create()">Créer</button>
-          <button class="btn btn-secondary" (click)="load()">Rafraîchir</button>
+          <button *ngIf="!editing" class="btn btn-primary" (click)="create()">Créer</button>
+          <button *ngIf="editing" class="btn btn-primary" (click)="update()">Mettre à jour</button>
+          <button *ngIf="editing" class="btn btn-secondary" (click)="cancelEdit()">Annuler</button>
+          <button *ngIf="!editing" class="btn btn-secondary" (click)="load()">Rafraîchir</button>
         </div>
         <p class="helper" style="margin-top:0.75rem;">{{ message }}</p>
       </div>
@@ -48,6 +50,7 @@ import { Fournisseur } from '../core/models';
               <th>Contact</th>
               <th>Qualité</th>
               <th>Note</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -56,6 +59,10 @@ import { Fournisseur } from '../core/models';
               <td>{{ item.contact }}</td>
               <td>{{ item.qualite_service }}</td>
               <td>{{ item.note ?? 0 }}</td>
+              <td>
+                <button class="btn btn-link" (click)="edit(item)">Editer</button>
+                <button class="btn btn-link danger" (click)="delete(item.id)">Supprimer</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -72,6 +79,8 @@ export class FournisseursComponent implements OnInit {
     qualite_service: 3,
     note: 0
   };
+  editing = false;
+  editingId?: number;
 
   constructor(private api: ApiService) {}
 
@@ -100,6 +109,53 @@ export class FournisseursComponent implements OnInit {
       },
       error: (error) => {
         this.message = error?.error?.message ?? 'Erreur lors de la création.';
+      }
+    });
+  }
+
+  edit(item: Fournisseur): void {
+    this.editing = true;
+    this.editingId = item.id;
+    this.form = { ...item } as Fournisseur;
+    this.message = 'Mode édition';
+  }
+
+  update(): void {
+    if (!this.editingId) {
+      this.message = 'Aucun fournisseur sélectionné.';
+      return;
+    }
+    this.api.updateFournisseur(this.editingId, this.form).subscribe({
+      next: () => {
+        this.message = 'Fournisseur mis à jour.';
+        this.editing = false;
+        this.editingId = undefined;
+        this.form = { nom: '', contact: '', qualite_service: 3, note: 0 };
+        this.load();
+      },
+      error: (error) => {
+        this.message = error?.error?.message ?? 'Erreur lors de la mise à jour.';
+      }
+    });
+  }
+
+  cancelEdit(): void {
+    this.editing = false;
+    this.editingId = undefined;
+    this.form = { nom: '', contact: '', qualite_service: 3, note: 0 };
+    this.message = 'Annulé.';
+  }
+
+  delete(id?: number): void {
+    if (!id) return;
+    if (!confirm('Supprimer ce fournisseur ?')) return;
+    this.api.deleteFournisseur(id).subscribe({
+      next: () => {
+        this.message = 'Fournisseur supprimé.';
+        this.load();
+      },
+      error: () => {
+        this.message = 'Erreur lors de la suppression.';
       }
     });
   }

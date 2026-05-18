@@ -17,12 +17,28 @@ export class ApiService {
     return this.http.post<any>(`${this.baseUrl}/fournisseurs`, payload);
   }
 
+  updateFournisseur(id: number, payload: Fournisseur) {
+    return this.http.put<any>(`${this.baseUrl}/fournisseurs/${id}`, payload);
+  }
+
+  deleteFournisseur(id: number) {
+    return this.http.delete<any>(`${this.baseUrl}/fournisseurs/${id}`);
+  }
+
   getProduits() {
     return this.http.get<any>(`${this.baseUrl}/produits`);
   }
 
   createProduit(payload: Produit) {
     return this.http.post<any>(`${this.baseUrl}/produits`, payload);
+  }
+
+  updateProduit(id: number, payload: Produit) {
+    return this.http.put<any>(`${this.baseUrl}/produits/${id}`, payload);
+  }
+
+  deleteProduit(id: number) {
+    return this.http.delete<any>(`${this.baseUrl}/produits/${id}`);
   }
 
   getCommandes() {
